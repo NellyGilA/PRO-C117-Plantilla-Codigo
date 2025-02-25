@@ -1,20 +1,11 @@
-import pandas as pd
-import numpy as np
 
-import tensorflow
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.models import load_model
+
 # datos de entrenamiento
 train_data = pd.read_csv("./static/assets/data_files/tweet_emotions.csv")    
 training_sentences = []
 
-for i in range(len(train_data)):
-    sentence = train_data.loc[i, "content"]
-    training_sentences.append(sentence)
 
 # cargar modelo
-model = load_model("./static/assets/model_files/Tweet_Emotion.h5")
 
 vocab_size = 40000
 max_length = 100
@@ -22,8 +13,7 @@ trunc_type = "post"
 padding_type = "post"
 oov_tok = "<OOV>"
 
-tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok)
-tokenizer.fit_on_texts(training_sentences)
+
 
 # asignar emoticones para diferentes emociones
 emo_code_url = {
